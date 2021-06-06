@@ -1,5 +1,9 @@
 import { Button, Form, Container, Col, Row } from 'react-bootstrap';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
+import { loginUser } from '../../store/store';
 
 const LoginForm = () => {
   const [loginForm, setLoginForm] = useState({
@@ -8,9 +12,23 @@ const LoginForm = () => {
   });
 
   const { username, password } = loginForm;
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const onChangeLoginForm = (event) => {
     setLoginForm({ ...loginForm, [event.target.name]: event.target.value });
+  };
+
+  const onLogin = async (event) => {
+    event.preventDefault();
+    try {
+      const loginData = await dispatch(loginUser(loginForm));
+      if (loginData.payload.success) {
+        history.push('/home');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -19,7 +37,7 @@ const LoginForm = () => {
         <Col />
         <Col md={6} xs={12} className='text-center mt-3'>
           <h2 className='ml-2'>Đăng nhập</h2>
-          <Form>
+          <Form onSubmit={onLogin}>
             <Form.Group>
               <Form.Control
                 type='text'

@@ -1,21 +1,24 @@
-## Tải thư viện
+## Đầu tiên, cài thư viện
 
 ```
+cd client
 npm install
+```
+
+## Sau đó, mở terminal
+
+## Run client
+
+```
+cd client
+npm start
 ```
 
 ## Run server
 
-```
-cd server
-npm start
-```
-
-## Run client
-
 Mở một terminal khác
 
 ```
-cd client
+cd server
 npm start
 ```

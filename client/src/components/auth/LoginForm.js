@@ -1,19 +1,21 @@
 import { Button, Form, Container, Col, Row } from 'react-bootstrap';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
-import { loginUser } from '../../store/store';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../../contexts/authContext';
+import AlertMessage from './AlertMessage';
 
 const LoginForm = () => {
+  // Context
+  const { loginUser } = useContext(AuthContext);
+
+  // Local state
   const [loginForm, setLoginForm] = useState({
     username: '',
     password: ''
   });
 
+  const [alert, setAlert] = useState(null);
+
   const { username, password } = loginForm;
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   const onChangeLoginForm = (event) => {
     setLoginForm({ ...loginForm, [event.target.name]: event.target.value });
@@ -22,9 +24,10 @@ const LoginForm = () => {
   const onLogin = async (event) => {
     event.preventDefault();
     try {
-      const loginData = await dispatch(loginUser(loginForm));
-      if (loginData.payload.success) {
-        history.push('/home');
+      const loginData = await loginUser(loginForm);
+      if (!loginData.success) {
+        setAlert({ type: 'danger', message: loginData.message });
+        setTimeout(() => setAlert(null), 5000);
       }
     } catch (error) {
       console.log(error);
@@ -36,7 +39,8 @@ const LoginForm = () => {
       <Row>
         <Col />
         <Col md={6} xs={12} className='text-center mt-3'>
-          <h2 className='ml-2'>Đăng nhập</h2>
+          <h2 className='my-2'>Đăng nhập</h2>
+          <AlertMessage info={alert} />
           <Form onSubmit={onLogin}>
             <Form.Group>
               <Form.Control

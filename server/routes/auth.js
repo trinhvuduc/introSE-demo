@@ -5,6 +5,26 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/Client');
 
+const verifyToken = require('../middleware/auth');
+
+// @route GET api/auth
+// @desc Check if user logged in
+// @access Public
+router.get('/', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId).select('-password');
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'User not found' });
+    }
+    return res.json({ success: true, user });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+});
+
 // @route POST api/auth/register
 // @desc Register user
 // @access Public

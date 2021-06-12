@@ -3,14 +3,19 @@ import { useContext } from 'react';
 
 const Home = () => {
   const {
-    authState: { user }
+    authState: {
+      user: { role, expertId, clientId }
+    }
   } = useContext(AuthContext);
 
-  console.log(user);
-  const { role, expertId, clientId } = user;
   const name = role === 'client' ? clientId.name : expertId.name;
 
-  return <h1>Xin chào {name}</h1>;
+  return (
+    <>
+      <h1>Xin chào {name}</h1>
+      <h3>role: {role}</h3>
+    </>
+  );
 };
 
 export default Home;

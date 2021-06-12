@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const verifyToken = require('../middleware/auth');
+const verifyExpert = require('../middleware/expert');
 
 const Post = require('../models/Post');
 
@@ -9,12 +10,27 @@ const Post = require('../models/Post');
 // @desc Get posts
 // @access Private
 router.get('/', verifyToken, async (req, res) => {
+  const { role, expertId, clientId } = req;
   try {
-    const posts = await Post.find({ user: req.userId }).populate('user', [
-      'username',
-      'createdAt',
-    ]);
-    res.json({ sucess: true, posts });
+    if (role === 'expert') {
+      const posts = await Post.find({ expertId })
+        .select('-clientsId')
+        .populate('expertId', 'name');
+
+      return res.json({ success: true, posts });
+    } else if (role === 'client') {
+      const posts = await Post.find({ clientsId: clientId })
+        .select('-clientsId')
+        .populate('expertId', 'name');
+
+      if (posts.length === 0) {
+        return res
+          .status(400)
+          .json({ success: false, message: 'Post not found' });
+      }
+
+      return res.json({ success: true, posts });
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error' });
@@ -24,8 +40,8 @@ router.get('/', verifyToken, async (req, res) => {
 // @route POST api/posts
 // @desc Create post
 // @access Private
-router.post('/', verifyToken, async (req, res) => {
-  const { title, description, url, status } = req.body;
+router.post('/', verifyToken, verifyExpert, async (req, res) => {
+  const { title, content, clientsId } = req.body;
 
   // Simple validation
   if (!title) {
@@ -36,15 +52,14 @@ router.post('/', verifyToken, async (req, res) => {
   try {
     const newPost = new Post({
       title,
-      description,
-      url: url.startsWith('https://') ? url : `https://${url}`,
-      status: status || 'TO WATCH',
-      user: req.userId,
+      content,
+      expertId: req.expertId,
+      clientsId
     });
 
     await newPost.save();
 
-    res.json({ sucess: true, message: 'Happy watching', post: newPost });
+    res.json({ sucess: true, message: 'Post successfull', post: newPost });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error' });
@@ -68,7 +83,7 @@ router.put('/:id', verifyToken, async (req, res) => {
       title,
       description: description || '',
       url: (url.startsWith('https://') ? url : `https://${url}`) || '',
-      status: status || 'TO WATCH',
+      status: status || 'TO WATCH'
     };
 
     const postUpdateCondition = { _id: req.params.id, user: req.userId };
@@ -83,7 +98,7 @@ router.put('/:id', verifyToken, async (req, res) => {
     if (!oldPost) {
       return res.status(401).json({
         success: false,
-        message: 'User not authorized or post not found',
+        message: 'User not authorized or post not found'
       });
     }
 
@@ -92,7 +107,7 @@ router.put('/:id', verifyToken, async (req, res) => {
       sucess: true,
       message: 'Updated completely',
       oldPost,
-      updatedPost,
+      updatedPost
     });
   } catch (error) {
     console.log(error);
@@ -112,7 +127,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
     if (!deletedPost) {
       return res.status(401).json({
         success: false,
-        message: 'User not authorized or post not found',
+        message: 'User not authorized or post not found'
       });
     }
 

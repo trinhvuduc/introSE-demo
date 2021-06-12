@@ -6,20 +6,17 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String
-  },
-  url: {
-    type: String
-  },
-  status: {
-    type: String,
-    enum: ['TO WATCH', 'WATCHING', 'WATCHED']
-  },
-  user: {
+  content: String,
+  expertId: {
     type: Schema.Types.ObjectId,
-    ref: 'users'
-  }
+    ref: 'experts'
+  },
+  clientsId: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'clients'
+    }
+  ]
 });
 
 module.exports = mongoose.model('posts', PostSchema);

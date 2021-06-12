@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/authContext';
 import Spinner from 'react-bootstrap/Spinner';
+import Navbar from '../navbar/Header';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const {
@@ -21,6 +22,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       render={(props) =>
         isAuthenticated ? (
           <>
+            <Navbar />
             <Component {...rest} {...props} />
           </>
         ) : (

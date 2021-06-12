@@ -27,7 +27,14 @@ const verifyToken = async (req, res, next) => {
     }
 
     req.role = user.role;
-    req.expertId = user.expertId;
+    // Role = expert
+    if (user.expertId) {
+      req.expertId = user.expertId;
+    }
+    // Role = client
+    if (user.clientId) {
+      req.clientId = user.clientId;
+    }
 
     next();
   } catch (error) {

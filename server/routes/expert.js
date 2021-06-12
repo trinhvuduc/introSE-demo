@@ -11,7 +11,7 @@ const verifyToken = require('../middleware/auth');
 const verifyExpert = require('../middleware/expert');
 
 // @route POST api/expert/register
-// @desc Register expert
+// @desc Register expert (only Admin)
 // @access Private
 router.post('/register', async (req, res) => {
   const { username, password, name } = req.body;
@@ -71,13 +71,12 @@ router.post('/register', async (req, res) => {
 });
 
 // @route PUT api/expert/add
-// @desc Add user into expert
+// @desc Add user into expert (only Expert)
 // @access Private
 router.put('/add', verifyToken, verifyExpert, async (req, res) => {
   const expertId = req.expertId;
   const { clientsId } = req.body;
   console.log(expertId);
-  console.log(clientId);
   try {
     const condition = { _id: expertId };
     const updatedExpert = await Expert.findOneAndUpdate(

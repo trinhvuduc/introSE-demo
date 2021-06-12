@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 const Client = require('../models/Client');
+const Expert = require('../models/Expert');
 
 const verifyToken = require('../middleware/auth');
 
@@ -13,15 +14,25 @@ const verifyToken = require('../middleware/auth');
 // @access Public
 router.get('/', verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.userId)
+    let user = await User.findById(req.userId)
       .select('-_id -password -createdAt -username') // - means not select
       .populate('clientId', '-_id name')
-      .populate('expertId', '-_id name');
+      .populate('expertId', 'name clientsId');
     if (!user) {
       return res
         .status(400)
         .json({ success: false, message: 'User not found' });
     }
+
+    let expertId;
+    if (user.role === 'expert') {
+      expertId = await Expert.findById(user.expertId._id)
+        .select('-name -username -_id')
+        .populate('clientsId', 'name');
+      let { clientsId } = expertId;
+      return res.json({ success: true, user, clientsId });
+    }
+
     return res.json({ success: true, user });
   } catch (error) {
     console.log(error);

@@ -2,24 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ExpertSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  role: {
-    type: String,
-    enum: ['client', 'expert', 'trainer', 'admin'],
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+  name: String,
+  age: String,
+  phoneNumber: String,
+  username: String,
+  clientsId: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'clients'
+    }
+  ]
 });
 
-module.exports = mongoose.model('clients', ExpertSchema);
+module.exports = mongoose.model('experts', ExpertSchema);

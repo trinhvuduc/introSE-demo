@@ -2,24 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ClientSchema = new Schema({
-  username: {
+  name: {
     type: String,
-    required: true,
-    unique: true
+    required: [true, "can't be blank"]
   },
-  password: {
-    type: String,
-    required: true
-  },
-  role: {
-    type: String,
-    enum: ['client', 'expert', 'trainer', 'admin'],
-    default: 'client'
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
+  username: String,
+  dob: String,
+  phoneNumber: String
 });
 
 module.exports = mongoose.model('clients', ClientSchema);

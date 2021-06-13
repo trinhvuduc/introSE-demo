@@ -47,7 +47,12 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
   if (!title) {
     return res
       .status(400)
-      .json({ sucess: false, message: 'Title is required' });
+      .json({ success: false, message: 'Title is required' });
+  }
+  if (clientsId.length === 0) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Chưa chọn khách hàng nào' });
   }
   try {
     const newPost = new Post({
@@ -59,7 +64,7 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
 
     await newPost.save();
 
-    res.json({ sucess: true, message: 'Post successfull', post: newPost });
+    res.json({ success: true, message: 'Post successfull', post: newPost });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error' });
@@ -76,7 +81,7 @@ router.put('/:id', verifyToken, async (req, res) => {
   if (!title) {
     return res
       .status(400)
-      .json({ sucess: false, message: 'Title is required' });
+      .json({ success: false, message: 'Title is required' });
   }
   try {
     const updatedPost = {
@@ -104,7 +109,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 
     // Update success
     res.json({
-      sucess: true,
+      success: true,
       message: 'Updated completely',
       oldPost,
       updatedPost
@@ -132,7 +137,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
     }
 
     // Delete success
-    res.json({ sucess: true, deletedPost });
+    res.json({ success: true, deletedPost });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error' });

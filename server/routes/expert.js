@@ -94,7 +94,7 @@ router.put('/add', verifyToken, verifyExpert, async (req, res) => {
       });
     }
     res.json({
-      sucess: true,
+      success: true,
       message: 'Updated client completely',
       updatedExpert
     });

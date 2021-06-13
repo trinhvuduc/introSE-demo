@@ -2,19 +2,16 @@ import { createContext, useReducer, useEffect } from 'react';
 import { authReducer } from '../reducers/authReducer';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
+import { apiUrl } from './actionType';
 
 export const AuthContext = createContext();
-
-const apiUrl =
-  process.env.NODE_ENV !== 'production'
-    ? 'http://localhost:5000/api'
-    : 'something';
 
 const AuthContextProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(authReducer, {
     authLoading: true,
     isAuthenticated: false,
-    user: null
+    user: null,
+    clients: null
   });
 
   // Authenticate user
@@ -24,11 +21,15 @@ const AuthContextProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get(`${apiUrl}/auth`);
-      if (response.data.success) {
+      const res = await axios.get(`${apiUrl}/auth`);
+      if (res.data.success) {
         dispatch({
           type: 'SET_AUTH',
-          payload: { isAuthenticated: true, user: response.data.user }
+          payload: {
+            isAuthenticated: true,
+            user: res.data.user,
+            clients: res.data.clientsId
+          }
         });
       }
     } catch (error) {

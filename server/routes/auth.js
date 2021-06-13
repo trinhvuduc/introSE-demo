@@ -17,7 +17,7 @@ router.get('/', verifyToken, async (req, res) => {
     let user = await User.findById(req.userId)
       .select('-_id -password -createdAt -username') // - means not select
       .populate('clientId', '-_id name')
-      .populate('expertId', 'name clientsId');
+      .populate('expertId', 'name');
     if (!user) {
       return res
         .status(400)
@@ -28,7 +28,7 @@ router.get('/', verifyToken, async (req, res) => {
     if (user.role === 'expert') {
       expertId = await Expert.findById(user.expertId._id)
         .select('-name -username -_id')
-        .populate('clientsId', 'name');
+        .populate('clientsId', 'name username');
       let { clientsId } = expertId;
       return res.json({ success: true, user, clientsId });
     }
@@ -114,14 +114,14 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ sucess: false, message: 'Incorrect username or password' });
+        .json({ success: false, message: 'Incorrect username or password' });
     }
     // Username found
     const passwordValid = await argon2.verify(user.password, password);
     if (!passwordValid) {
       return res
         .status(400)
-        .json({ sucess: false, message: 'Incorrect password or password' });
+        .json({ success: false, message: 'Incorrect password or password' });
     }
     // All good
     // Return token

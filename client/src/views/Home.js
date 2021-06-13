@@ -1,5 +1,7 @@
-import { AuthContext } from '../contexts/authContext';
 import { useContext } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+
+import { AuthContext } from '../contexts/authContext';
 
 const Home = () => {
   const {
@@ -12,8 +14,13 @@ const Home = () => {
 
   return (
     <>
-      <h1>Xin chào {name}</h1>
-      <h3>role: {role}</h3>
+      <Container>
+        <Row>
+          <Col md={12} xs={12} className='text-center mt-3'>
+            <h1>Home</h1>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 };

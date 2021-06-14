@@ -1,0 +1,132 @@
+body{
+    font: 15px/1.5 Arial, Helvetica,sans-serif;
+  padding:0;
+  margin:0;
+}
+
+
+.home{
+    display: flex;
+    background: url("images/BACKGROUND.png");
+    background-repeat: no-repeat;
+    height: auto;
+    font-family: sans-serif;
+    
+}
+
+.home .max-width .home-content{
+    margin: 10% 0 0 10%;
+    float: left;
+    color: #fff;
+    width: 40%;
+}
+
+.home .max-width .home-content .text-1{
+    font-size: 15px;
+    margin: 30px 20px 0 0;
+
+}
+
+.home .max-width .home-content .text-2{
+    font-size: 30px;
+
+}
+
+.home .max-width .home-content .text-3{
+    font-size: 20px;
+
+}
+
+.home .max-width .home-content button{
+    background-color: #ff4f29;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    /* font-weight: bolder; */
+    text-align: center;
+    font-size: 14px;
+}
+
+
+/* .home .max-width .home-content .text-4{
+    font-size: 10px;
+    margin-top: 7px;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 20px;
+    text-align: center;
+    padding-top: 13px;  
+    width: 130px;
+    height: 40px;
+    font-weight: bolder;  
+    cursor: pointer; 
+} */
+
+.home .max-width .home-content button:hover{
+    background: black;
+}
+
+.home .max-width .logo{
+    display: flex;
+    margin: 30px 0 200px 0;
+    background: url("images/img-1.png");
+    height: 540px;
+    width: 540px;
+    float: right;   
+}
+
+
+.home .max-width .content{
+    margin-top: 850px;
+    display: flex;
+    margin-left:850px;
+    font-style: italic;
+}
+
+.home .max-width .content span{
+    font-size: 50px;
+    margin-top: -30px;
+}
+
+
+footer{
+
+}
+
+footer .container .title{
+    margin-bottom: -18px;
+    font-style: italic;
+}
+footer .container .members .name-2{
+    margin-left: 80px;
+}
+
+footer .container .members .name-3{
+    margin-left: 80px;
+}
+footer .container .members .name-4{
+    margin-left: 80px;
+}
+footer .container .members .name-5{
+    margin-left: 300px;
+    margin-top: -89px;
+}
+footer .container .members .name-6{
+    margin-left: 300px;
+    
+}
+
+footer .container .school{
+    margin-left: 700px;
+    margin-top: -50px;
+}
+
+footer .container .teacher{
+    margin-left: 700px;   
+}
+
+
+

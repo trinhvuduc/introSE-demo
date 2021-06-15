@@ -7,6 +7,8 @@ body{
 
 .home{
     display: flex;
+    margin: 0;
+    padding: 0;
     background: url("images/BACKGROUND.png");
     background-repeat: no-repeat;
     height: auto;
@@ -83,6 +85,7 @@ body{
     margin-top: 850px;
     display: flex;
     margin-left:850px;
+    margin-right: 250px;
     font-style: italic;
 }
 
@@ -108,11 +111,12 @@ footer .container .members .name-3{
     margin-left: 80px;
 }
 footer .container .members .name-4{
-    margin-left: 80px;
+    margin-left: 300px;
+    margin-top: -68px;
 }
 footer .container .members .name-5{
     margin-left: 300px;
-    margin-top: -89px;
+    /* margin-top: -89px; */
 }
 footer .container .members .name-6{
     margin-left: 300px;
@@ -121,7 +125,7 @@ footer .container .members .name-6{
 
 footer .container .school{
     margin-left: 700px;
-    margin-top: -50px;
+    margin-top: -67px;
 }
 
 footer .container .teacher{

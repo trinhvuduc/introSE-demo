@@ -6,7 +6,9 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
+  week: String,
   content: String,
+  note: String,
   expertId: {
     type: Schema.Types.ObjectId,
     ref: 'experts'

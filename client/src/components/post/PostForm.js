@@ -17,10 +17,12 @@ const PostForm = () => {
   // Local state
   const [newPost, setPost] = useState({
     title: '',
+    week: '',
     content: '',
+    note: '',
     clientsId: []
   });
-  const { title, content, clientsId } = newPost;
+  const { title, content, week, note, clientsId } = newPost;
 
   // Alert state
   const [alert, setAlert] = useState(null);
@@ -43,9 +45,10 @@ const PostForm = () => {
   const onSubmit = async () => {
     try {
       const res = await addPost(newPost);
-      console.log(res);
       if (res.success) {
-        setPost({ title: '', content: '', clientsId: [] });
+        setPost({ ...newPost, title: '', content: '', week: '', note: '' });
+        setAlert({ type: 'success', message: res.message });
+        setTimeout(() => setAlert(null), 5000);
       } else {
         setAlert({ type: 'danger', message: res.message });
         setTimeout(() => setAlert(null), 5000);
@@ -58,7 +61,7 @@ const PostForm = () => {
   const list = clients.length ? (
     clients.map((client) => (
       <label className='client' key={client._id}>
-        <p>
+        <p style={{ fontSize: '18px', marginLeft: '20px' }}>
           {client.name} ({client.username})
         </p>
         <input type='checkbox' onChange={() => onChangeCheckbox(client._id)} />
@@ -73,13 +76,13 @@ const PostForm = () => {
     <>
       <Row>
         <Col md={6}>
-          <h2 className='my-2 text-center'>Chế độ ăn mới</h2>
+          <h4 className='my-2 text-center'>Chế độ ăn mới</h4>
           <Form>
             <Form.Group>
-              Tiêu Đề
+              <Form.Label>Tiêu Đề</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Title'
+                placeholder='Tiêu đề'
                 name='title'
                 required
                 value={title}
@@ -87,25 +90,54 @@ const PostForm = () => {
               />
             </Form.Group>
             <Form.Group>
-              Nội dung
+              <Form.Label>Tuần</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Content'
+                placeholder='Tuần'
+                name='week'
+                required
+                value={week}
+                onChange={onChangeForm}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Nội dung</Form.Label>
+              <Form.Control
+                as='textarea'
+                rows={8}
+                style={{ resize: 'none' }}
+                placeholder='Thứ 2: ...&#10;Thứ 3: ...'
                 name='content'
                 required
                 value={content}
                 onChange={onChangeForm}
               />
             </Form.Group>
+            <Form.Group>
+              <Form.Label>Ghi chú</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Ghi chú (nếu có)'
+                name='note'
+                required
+                value={note}
+                onChange={onChangeForm}
+              />
+            </Form.Group>
           </Form>
         </Col>
         <Col>
-          <h2 className='my-2 text-center'>Danh sách khách hàng</h2>
+          <h4 className='my-2 text-center'>Danh sách khách hàng</h4>
 
-          {list}
+          <div className='my-4'>{list}</div>
 
           <AlertMessage info={alert} />
-          <Button variant='success' type='submit' onClick={onSubmit}>
+          <Button
+            style={{ width: 'inherit' }}
+            variant='success'
+            type='submit'
+            onClick={onSubmit}
+          >
             Submit
           </Button>
         </Col>

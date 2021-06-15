@@ -21,7 +21,7 @@ const Header = (props) => {
         <Row>
           <Col md={12} xs={12}>
             <Navbar bg='light' expand='lg'>
-              <Navbar.Brand href='#home'>HealthApp</Navbar.Brand>
+              <Navbar.Brand href='/home'>HealthApp</Navbar.Brand>
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
                 <Nav className='mr-auto'>

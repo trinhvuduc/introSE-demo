@@ -41,7 +41,7 @@ router.get('/', verifyToken, async (req, res) => {
 // @desc Create post
 // @access Private
 router.post('/', verifyToken, verifyExpert, async (req, res) => {
-  const { title, content, clientsId } = req.body;
+  const { title, content, week, note, clientsId } = req.body;
 
   // Simple validation
   if (!title) {
@@ -49,6 +49,17 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
       .status(400)
       .json({ success: false, message: 'Title is required' });
   }
+  if (!week) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Week is required' });
+  }
+  if (!content) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Content is required' });
+  }
+
   if (clientsId.length === 0) {
     return res
       .status(400)
@@ -58,6 +69,8 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
     const newPost = new Post({
       title,
       content,
+      week,
+      note,
       expertId: req.expertId,
       clientsId
     });

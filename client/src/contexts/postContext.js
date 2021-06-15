@@ -36,7 +36,7 @@ const PostContextProvider = ({ children }) => {
       const res = await axios.post(`${apiUrl}/post`, newPost);
       if (res.data.success) {
         dispatch({ type: ADD_POST, payload: res.data.post });
-        return res;
+        return res.data;
       }
     } catch (error) {
       return error.response.data

@@ -42,22 +42,34 @@ router.get('/', verifyToken, async (req, res) => {
 // @access Private
 router.post('/', verifyToken, verifyExpert, async (req, res) => {
   const { title, content, week, note, clientsId } = req.body;
+  const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } =
+    content;
 
   // Simple validation
   if (!title) {
     return res
       .status(400)
-      .json({ success: false, message: 'Title is required' });
+      .json({ success: false, message: 'Chưa nhập tiêu đề' });
   }
-  if (!week) {
+  function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+  }
+  if (!isNumeric(week)) {
     return res
       .status(400)
-      .json({ success: false, message: 'Week is required' });
+      .json({ success: false, message: 'Sai định dạng tuần' });
   }
   if (!content) {
     return res
       .status(400)
       .json({ success: false, message: 'Content is required' });
+  }
+  const str =
+    monday + tuesday + wednesday + thursday + friday + saturday + sunday;
+  if (!str) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Nhập ít nhất một ngày' });
   }
 
   if (clientsId.length === 0) {

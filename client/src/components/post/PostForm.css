@@ -55,3 +55,18 @@
 .client input:checked ~ .checkmark:after {
   display: block;
 }
+
+.week {
+  width: 50px;
+  margin-left: -10px;
+}
+
+.note {
+  width: 342px;
+  margin-left: -18px;
+}
+
+.form-label {
+  width: 80px;
+  padding-top: 8px;
+}

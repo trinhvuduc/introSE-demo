@@ -17,18 +17,35 @@ const PostForm = () => {
   // Local state
   const [newPost, setPost] = useState({
     title: '',
-    week: '',
-    content: '',
+    week: null,
+    content: {
+      monday: '',
+      tuesday: '',
+      wednesday: '',
+      thursday: '',
+      friday: '',
+      saturday: '',
+      sunday: ''
+    },
     note: '',
     clientsId: []
   });
   const { title, content, week, note, clientsId } = newPost;
+  const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } =
+    content;
 
   // Alert state
   const [alert, setAlert] = useState(null);
 
   const onChangeForm = (event) => {
     setPost({ ...newPost, [event.target.name]: event.target.value });
+  };
+
+  const onChangeDay = (event) => {
+    setPost({
+      ...newPost,
+      content: { ...content, [event.target.name]: event.target.value }
+    });
   };
 
   const onChangeCheckbox = (id) => {
@@ -74,56 +91,116 @@ const PostForm = () => {
 
   return (
     <>
-      <Row>
+      <Row className='mt-2'>
         <Col md={6}>
           <h4 className='my-2 text-center'>Chế độ ăn mới</h4>
           <Form>
-            <Form.Group>
-              <Form.Label>Tiêu Đề</Form.Label>
+            <Form.Group className='d-flex'>
+              <Form.Label>Tiêu Đề*</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Tiêu đề'
                 name='title'
                 required
                 value={title}
                 onChange={onChangeForm}
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Tuần</Form.Label>
+            <div className='d-flex' style={{ height: '52px' }}>
+              <Form.Group className='d-flex'>
+                <Form.Label>Tuần*</Form.Label>
+                <Form.Control
+                  type='text'
+                  name='week'
+                  required
+                  value={week}
+                  onChange={onChangeForm}
+                  className='week'
+                />
+              </Form.Group>
+              <Form.Group className='d-flex '>
+                <Form.Label className='ml-3'>Ghi chú</Form.Label>
+                <Form.Control
+                  type='text'
+                  name='note'
+                  required
+                  value={note}
+                  onChange={onChangeForm}
+                  className='note'
+                />
+              </Form.Group>
+            </div>
+            <h5>Nội dung*</h5>
+            <Form.Group className='d-flex'>
+              <Form.Label>Thứ hai</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Tuần'
-                name='week'
+                name='monday'
                 required
-                value={week}
-                onChange={onChangeForm}
+                value={monday}
+                onChange={onChangeDay}
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Label>Nội dung</Form.Label>
-              <Form.Control
-                as='textarea'
-                rows={8}
-                style={{ resize: 'none' }}
-                placeholder='Thứ 2: ...&#10;Thứ 3: ...'
-                name='content'
-                required
-                value={content}
-                onChange={onChangeForm}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Ghi chú</Form.Label>
+            <Form.Group className='d-flex'>
+              <Form.Label>Thứ ba</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Ghi chú (nếu có)'
-                name='note'
+                name='tuesday'
                 required
-                value={note}
-                onChange={onChangeForm}
+                value={tuesday}
+                onChange={onChangeDay}
               />
             </Form.Group>
+            <Form.Group className='d-flex'>
+              <Form.Label>Thứ Tư</Form.Label>
+              <Form.Control
+                type='text'
+                name='wednesday'
+                required
+                value={wednesday}
+                onChange={onChangeDay}
+              />
+            </Form.Group>
+            <Form.Group className='d-flex'>
+              <Form.Label>Thứ Năm</Form.Label>
+              <Form.Control
+                type='text'
+                name='thursday'
+                required
+                value={thursday}
+                onChange={onChangeDay}
+              />
+            </Form.Group>
+            <Form.Group className='d-flex'>
+              <Form.Label>Thứ Sáu</Form.Label>
+              <Form.Control
+                type='text'
+                name='friday'
+                required
+                value={friday}
+                onChange={onChangeDay}
+              />
+            </Form.Group>
+            <Form.Group className='d-flex'>
+              <Form.Label>Thứ Bảy</Form.Label>
+              <Form.Control
+                type='text'
+                name='saturday'
+                required
+                value={saturday}
+                onChange={onChangeDay}
+              />
+            </Form.Group>
+            <Form.Group className='d-flex'>
+              <Form.Label>Chủ nhật</Form.Label>
+              <Form.Control
+                type='text'
+                name='sunday'
+                required
+                value={sunday}
+                onChange={onChangeDay}
+              />
+            </Form.Group>
+            <p>* là bắt buộc</p>
           </Form>
         </Col>
         <Col>

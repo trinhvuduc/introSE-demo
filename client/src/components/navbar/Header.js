@@ -25,9 +25,6 @@ const Header = (props) => {
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
                 <Nav className='mr-auto'>
-                  <Nav.Link to='/home' as={Link}>
-                    Trang chủ
-                  </Nav.Link>
                   <Nav.Link to='/diet' as={Link}>
                     Chế độ ăn
                   </Nav.Link>

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Container, Row, Col, Spinner, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Dropdown, Table } from 'react-bootstrap';
 
 import { PostContext } from '../contexts/postContext';
 
@@ -10,6 +10,19 @@ const Diet = () => {
   } = useContext(PostContext);
 
   useEffect(() => getPosts(), []);
+
+  // const {
+  //   content: { monday, tuesday, wednesday, thursday, friday, saturday, sunday },
+  //   expertId: { name },
+  //   title,
+  //   week
+  // } = { ...posts[posts.length - 1] };
+  const post = { ...posts[posts.length - 1] };
+  const { content, expertId, title, week } = post;
+
+  const onChangeDropDown = () => {
+    console.log(1);
+  };
 
   let body = null;
 
@@ -24,55 +37,70 @@ const Diet = () => {
   } else {
     body = (
       <>
-        <Row className='row-cols-1 row-cols-md-3 g-4 mx-auto mt-3'>
+        <div className='d-flex justify-content-between mt-3'>
+          <div className='d-flex'>
+            <Dropdown className=''>
+              <Dropdown.Toggle variant='success' id='dropdown-basic'>
+                Tuần 1
+              </Dropdown.Toggle>
+              title : {title}
+              <Dropdown.Menu>
+                <Dropdown.Item href='#/action-1' onClick={onChangeDropDown}>
+                  Action
+                </Dropdown.Item>
+                <Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>
+                <Dropdown.Item href='#/action-3'>Something else</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <p className='pt-2 pl-2'></p>
+          </div>
+          <div className='d-flex'>
+            <p className='pt-2'>Trò chuyện</p>
+            <p className='pt-2 pl-2'>Đánh giá</p>
+          </div>
+        </div>
+
+        {/* <Row className='row-cols-1 row-cols-md-3 g-4 mx-auto mt-3'>
           {posts.map((post) => (
             <Col key={post._id} className='my-2 border'>
-              {/* <SinglePost post={post} /> */}
               <p>title: {post.title}</p>
               <p>week: {post.week}</p>
-              <p>content: {post.content}</p>
+              <p>content:</p>
             </Col>
           ))}
-        </Row>
-        {/* <Carousel>
-          <Carousel.Item>
-            <img
-              className='d-block w-100'
-              src='https://media-cdn.laodong.vn/Storage/NewsPortal/2020/6/23/814689/7-Giong-Meo-Dat-Nhat-02.jpg'
-              alt='First slide'
-            />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className='d-block w-100'
-              src='assets/white.png'
-              alt='Second slide'
-            />
-
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className='d-block w-100'
-              src='holder.js/800x400?text=Third slide&bg=20232a'
-              alt='Third slide'
-            />
-
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel> */}
+        </Row> */}
+        <Table striped bordered hover size='sm'>
+          <tbody>
+            <tr>
+              <td>Thứ 2</td>
+              <td>{content.monday}</td>
+            </tr>
+            <tr>
+              <td>Thứ 3</td>
+              <td>{content.thursday}</td>
+            </tr>
+            <tr>
+              <td>Thứ 4</td>
+              <td>{content.wednesday}</td>
+            </tr>
+            <tr>
+              <td>Thứ 5</td>
+              <td>{content.thursday}</td>
+            </tr>
+            <tr>
+              <td>Thứ 6</td>
+              <td>{content.friday}</td>
+            </tr>
+            <tr>
+              <td>Thứ 7</td>
+              <td>{content.saturday}</td>
+            </tr>
+            <tr>
+              <td>Chủ nhật</td>
+              <td>{content.sunday}</td>
+            </tr>
+          </tbody>
+        </Table>
       </>
     );
   }

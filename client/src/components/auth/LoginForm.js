@@ -40,7 +40,7 @@ const LoginForm = () => {
       <Row>
         <Col />
         <Col md={6} xs={12} className='text-center mt-3'>
-          <h2 className='my-2'>Đăng nhập vào HealthApp</h2>
+          <h3 className='my-2'>Đăng nhập vào HealthApp</h3>
             <div className='box'>  
             <h7 className='text-1'>Số điện thoại</h7>  
           <AlertMessage info={alert} />

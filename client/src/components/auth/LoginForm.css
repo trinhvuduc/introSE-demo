@@ -55,8 +55,8 @@ body{
 }
 
 .newAccount{
-    margin-top:430px;
-    margin-left: 570px;
+    /* margin-top:430px; */
+    /* margin-left: 570px; */
     width: 400px;
     height: 40px;
     padding-top: 10px;
@@ -67,6 +67,8 @@ body{
     transform: translate(-50%, -50%);
     background: #fff;
     text-align: center;
+    top: 57%;
+    left: 50%;
 }
 
 .newAccount span{

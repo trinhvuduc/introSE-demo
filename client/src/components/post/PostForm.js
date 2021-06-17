@@ -17,7 +17,7 @@ const PostForm = () => {
   // Local state
   const [newPost, setPost] = useState({
     title: '',
-    week: null,
+    week: '',
     content: {
       monday: '',
       tuesday: '',
@@ -111,40 +111,43 @@ const PostForm = () => {
           <h4 className='my-2 text-center'>Chế độ ăn mới</h4>
           <Form>
             <Form.Group className='d-flex'>
-              <Form.Label>Tiêu Đề*</Form.Label>
+              <Form.Label>Tiêu Đề</Form.Label>
               <Form.Control
                 type='text'
                 name='title'
                 required
                 value={title}
                 onChange={onChangeForm}
+                className='input-form'
               />
             </Form.Group>
             <div className='d-flex' style={{ height: '52px' }}>
               <Form.Group className='d-flex'>
-                <Form.Label>Tuần*</Form.Label>
+                <Form.Label>Tuần</Form.Label>
                 <Form.Control
                   type='text'
                   name='week'
                   required
                   value={week}
                   onChange={onChangeForm}
-                  className='week'
+                  className='week input-form'
                 />
               </Form.Group>
               <Form.Group className='d-flex '>
-                <Form.Label className='ml-3'>Ghi chú</Form.Label>
+                <Form.Label className='ml-3' style={{ paddingTop: '0' }}>
+                  Ghi chú (nếu có)
+                </Form.Label>
                 <Form.Control
                   type='text'
                   name='note'
                   required
                   value={note}
                   onChange={onChangeForm}
-                  className='note'
+                  className='note input-form'
                 />
               </Form.Group>
             </div>
-            <h5>Nội dung*</h5>
+            <h5>Nội dung</h5>
             <Form.Group className='d-flex'>
               <Form.Label>Thứ hai</Form.Label>
               <Form.Control
@@ -153,6 +156,7 @@ const PostForm = () => {
                 required
                 value={monday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
             <Form.Group className='d-flex'>
@@ -163,6 +167,7 @@ const PostForm = () => {
                 required
                 value={tuesday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
             <Form.Group className='d-flex'>
@@ -173,6 +178,7 @@ const PostForm = () => {
                 required
                 value={wednesday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
             <Form.Group className='d-flex'>
@@ -183,6 +189,7 @@ const PostForm = () => {
                 required
                 value={thursday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
             <Form.Group className='d-flex'>
@@ -193,6 +200,7 @@ const PostForm = () => {
                 required
                 value={friday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
             <Form.Group className='d-flex'>
@@ -203,6 +211,7 @@ const PostForm = () => {
                 required
                 value={saturday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
             <Form.Group className='d-flex'>
@@ -213,9 +222,9 @@ const PostForm = () => {
                 required
                 value={sunday}
                 onChange={onChangeDay}
+                className='input-form'
               />
             </Form.Group>
-            <p>* là bắt buộc</p>
           </Form>
         </Col>
         <Col>
@@ -229,6 +238,7 @@ const PostForm = () => {
             variant='success'
             type='submit'
             onClick={onSubmit}
+            className='input-form'
           >
             Submit
           </Button>

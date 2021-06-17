@@ -70,3 +70,11 @@
   width: 80px;
   padding-top: 8px;
 }
+
+.input-form {
+  border-radius: 9px;
+}
+
+.alert {
+  border-radius: 9px;
+}

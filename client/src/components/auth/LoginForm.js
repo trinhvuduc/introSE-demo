@@ -54,7 +54,7 @@ const LoginForm = () => {
               marginTop: '37px'
             }}
           >
-            <AlertMessage info={alert} />
+            <AlertMessage info={alert} style={{ borderRadius: '9px' }} />
           </div>
           <div className='box'>
             <h6 className='text-1'>Tên đăng nhập</h6>
@@ -69,7 +69,7 @@ const LoginForm = () => {
                   onChange={onChangeLoginForm}
                 />
               </Form.Group>
-              <h6 className='text-2'>Mật Khẩu</h6>
+              <h6 className='text-2'>Mật khẩu</h6>
               <h6 className='text-3a'>Quên mật khẩu?</h6>
               <Form.Group>
                 <Form.Control
@@ -86,7 +86,7 @@ const LoginForm = () => {
             </Form>
           </div>
           <div className='newAccount'>
-            Bạn mới sử dụng HealthApp? <span>Tạo tài khoản mới.</span>
+            Bạn mới sử dụng HealthApp? <span>Tạo tài khoản ngay.</span>
           </div>
         </Col>
         <Col />

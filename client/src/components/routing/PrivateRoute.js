@@ -11,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   if (authLoading)
     return (
-      <div className='spinner-container'>
+      <div className='spinner-container text-center'>
         <Spinner animation='border' variant='info' />
       </div>
     );

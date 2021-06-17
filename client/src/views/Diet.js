@@ -1,16 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
-import {
-  Container,
-  Row,
-  Col,
-  Spinner,
-  Dropdown,
-  Table,
-  Form
-} from 'react-bootstrap';
-import { BsChatSquare, BsPerson, BsAward } from 'react-icons/bs';
+import { useContext, useEffect } from 'react';
+import { Container, Row, Col, Spinner, Form } from 'react-bootstrap';
+import { BsChatSquare, BsAward, BsPencilSquare, BsTrash } from 'react-icons/bs';
 
 import { PostContext } from '../contexts/postContext';
+import { AuthContext } from '../contexts/authContext';
 import './Diet.css';
 
 const Diet = () => {
@@ -20,30 +13,16 @@ const Diet = () => {
     getPosts
   } = useContext(PostContext);
 
-  // State
-  const [meal, setMeal] = useState({});
+  const {
+    authState: {
+      user: { role }
+    }
+  } = useContext(AuthContext);
 
-  useEffect(() => {
-    getPosts().then((res) => setMeal());
-  }, []);
-
-  // const {
-  //   content: { monday, tuesday, wednesday, thursday, friday, saturday, sunday },
-  //   expertId: { name },
-  //   title,
-  //   week
-  // } = { ...posts[posts.length - 1] };
-
-  // console.log(posts);
+  useEffect(() => getPosts(), []);
 
   let post = { ...posts[posts.length - 1] };
-  const { content, expertId, title, week } = post;
-
-  const onChangeDropDown = (event) => {
-    console.log(event.target.value);
-    post = posts.filter((post) => post._id === event.target.value)[0];
-    setMeal({ post });
-  };
+  const { content, title, week } = post;
 
   let body = null;
 
@@ -55,27 +34,23 @@ const Diet = () => {
     );
   } else if (posts.length === 0) {
     body = <h2>Chưa có bài xem nào</h2>;
-  } else {
+  } else if (role === 'client') {
     body = (
       <>
         <div className='d-flex justify-content-between mt-3'>
-          <div className='d-flex'>
+          <div className='d-flex' style={{ width: '700px' }}>
             <Form.Control
               as='select'
               className='mr-sm-2'
               custom
-              onChange={onChangeDropDown}
+              style={{ width: '180px' }}
             >
-              <option
-                value={post._id}
-                key={post._id}
-                onClick={onChangeDropDown}
-              >
+              <option value={post._id} key={post._id}>
                 Tuần {week}
               </option>
             </Form.Control>
             <p className='pt-2 pl-2' style={{ width: '319px' }}>
-              Tiêu đề
+              {title}
             </p>
           </div>
           <div className='d-flex'>
@@ -135,13 +110,30 @@ const Diet = () => {
         </table>
       </>
     );
+  } else if (role === 'expert') {
+    body = (
+      <>
+        <Row className='row-cols-1 row-cols-md-3 g-4 mx-auto mt-3'>
+          {posts.map((post, i) => (
+            <Col key={post._id} className='my-2 border'>
+              <p>Bài {i + 1}</p>
+              <p>Tiêu đề: {post.title}</p>
+              <p>Tuần: {post.week}</p>
+              <span className='mr-2 bar'>
+                Sửa <BsPencilSquare style={{ color: '#7cc17c' }} />
+              </span>
+              <span className='mr-2 bar'>
+                Xóa <BsTrash style={{ color: '#bf1f1f' }} />
+              </span>
+              <p> </p>
+            </Col>
+          ))}
+        </Row>
+      </>
+    );
   }
 
-  return (
-    <>
-      <Container>{body}</Container>
-    </>
-  );
+  return <Container>{body}</Container>;
 };
 
 export default Diet;

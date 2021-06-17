@@ -167,3 +167,10 @@ td.text-left8 {
   background-color: #d1d0cc;
 }
 
+.bar {
+  cursor: pointer;
+}
+
+.bar:hover {
+  color: burlywood;
+}

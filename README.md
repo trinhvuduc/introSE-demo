@@ -1,4 +1,8 @@
-## Đầu tiên, cài thư viện
+## Đầu tiên, cài đặt Nodejs
+
+https://nodejs.org/en/
+
+## Sau đó, cài đặt vài thư viện cần thiết
 
 ```
 cd client
@@ -8,7 +12,7 @@ cd server
 npm install
 ```
 
-## Sau đó, mở terminal
+## Tiếp theo, mở terminal trỏ về đúng folder
 
 ## Run client
 
@@ -25,3 +29,5 @@ Mở một terminal khác
 cd server
 npm start
 ```
+
+Enjoy ^^

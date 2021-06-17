@@ -89,7 +89,7 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
 
     await newPost.save();
 
-    res.json({ success: true, message: 'Post successfull', post: newPost });
+    res.json({ success: true, message: 'Đăng bài thành công', post: newPost });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: 'Internal server error' });

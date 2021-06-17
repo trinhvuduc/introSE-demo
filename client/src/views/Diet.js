@@ -98,7 +98,7 @@ const Diet = () => {
         <table className='table-fill'>
           <thead>
             <tr>
-              <th className='text-left' style={{ width: '240px' }}>
+              <th className='text-left' style={{ width: '180px' }}>
                 Thứ
               </th>
               <th className='text-left'>Nội dung</th>
@@ -106,32 +106,32 @@ const Diet = () => {
           </thead>
           <tbody className='table-hover'>
             <tr>
-              <td className='text-left'>Thứ 2</td>
-              <td className='text-left'>{content.monday}</td>
+              <td className='text-left2'>Thứ 2</td>
+              <td className='text-left2'>{content.monday}</td>
             </tr>
             <tr>
-              <td className='text-left'>Thứ 3</td>
-              <td className='text-left'>{content.tuesday}</td>
+              <td className='text-left3'>Thứ 3</td>
+              <td className='text-left3'>{content.tuesday}</td>
             </tr>
             <tr>
-              <td className='text-left'>Thứ 4</td>
-              <td className='text-left'>{content.wednesday}</td>
+              <td className='text-left4'>Thứ 4</td>
+              <td className='text-left4'>{content.wednesday}</td>
             </tr>
             <tr>
-              <td className='text-left'>Thứ 5</td>
-              <td className='text-left'>{content.thursday}</td>
+              <td className='text-left5'>Thứ 5</td>
+              <td className='text-left5'>{content.thursday}</td>
             </tr>
             <tr>
-              <td className='text-left'>Thứ 6</td>
-              <td className='text-left'>{content.friday}</td>
+              <td className='text-left6'>Thứ 6</td>
+              <td className='text-left6'>{content.friday}</td>
             </tr>
             <tr>
-              <td className='text-left'>Thứ 7</td>
-              <td className='text-left'>{content.saturday}</td>
+              <td className='text-left7'>Thứ 7</td>
+              <td className='text-left7'>{content.saturday}</td>
             </tr>
             <tr>
-              <td className='text-left'>Chủ nhật</td>
-              <td className='text-left'>{content.sunday}</td>
+              <td className='text-left8'>Chủ nhật</td>
+              <td className='text-left8'>{content.sunday}</td>
             </tr>
           </tbody>
         </table>

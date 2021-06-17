@@ -1,4 +1,4 @@
-import './Home.css';
+import './Home1.css';
 
 const Home = () => {
   return (
@@ -8,7 +8,9 @@ const Home = () => {
           <div className='home-content'>
             <div className='text-1'>BÀI VIẾT NỔI BẬT</div>
             <div className='text-2'>MANG THIÊN NHIÊN VÀO NHÀ</div>
-            <div className='text-3'>LỢI ÍCH CỦA VIỆC TRỒNG CÂY XANH TRONG NHÀ</div>
+            <div className='text-3'>
+              LỢI ÍCH CỦA VIỆC TRỒNG CÂY XANH TRONG NHÀ
+            </div>
             {/* <div className="text-4"><p>KHÁM PHÁ NGAY</p></div> */}
             <button name='button' value='OK' type='button'>
               KHÁM PHÁ NGAY
@@ -42,7 +44,9 @@ const Home = () => {
             <div className='name-6'>Phạm Đình Hai</div>
           </div>
           <div className='school'>HỌC VIỆN CÔNG NGHỆ BƯU CHÍNH VIỄN THÔNG</div>
-          <div className='teacher'>GIẢNG VIÊN HƯỚNG DẪN: PGS-TS HOÀNG HỮU HẠNH</div>
+          <div className='teacher'>
+            GIẢNG VIÊN HƯỚNG DẪN: PGS-TS HOÀNG HỮU HẠNH
+          </div>
         </div>
       </footer>
 

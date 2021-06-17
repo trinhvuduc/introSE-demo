@@ -1,15 +1,31 @@
-import { useContext, useEffect } from 'react';
-import { Container, Row, Col, Spinner, Dropdown, Table } from 'react-bootstrap';
+import { useContext, useEffect, useState } from 'react';
+import {
+  Container,
+  Row,
+  Col,
+  Spinner,
+  Dropdown,
+  Table,
+  Form
+} from 'react-bootstrap';
+import { BsChatSquare, BsPerson, BsAward } from 'react-icons/bs';
 
 import { PostContext } from '../contexts/postContext';
+import './Diet.css';
 
 const Diet = () => {
+  // Context
   const {
     postState: { posts, postsLoading },
     getPosts
   } = useContext(PostContext);
 
-  useEffect(() => getPosts(), []);
+  // State
+  const [meal, setMeal] = useState({});
+
+  useEffect(() => {
+    getPosts().then((res) => setMeal());
+  }, []);
 
   // const {
   //   content: { monday, tuesday, wednesday, thursday, friday, saturday, sunday },
@@ -17,11 +33,16 @@ const Diet = () => {
   //   title,
   //   week
   // } = { ...posts[posts.length - 1] };
-  const post = { ...posts[posts.length - 1] };
+
+  // console.log(posts);
+
+  let post = { ...posts[posts.length - 1] };
   const { content, expertId, title, week } = post;
 
-  const onChangeDropDown = () => {
-    console.log(1);
+  const onChangeDropDown = (event) => {
+    console.log(event.target.value);
+    post = posts.filter((post) => post._id === event.target.value)[0];
+    setMeal({ post });
   };
 
   let body = null;
@@ -39,68 +60,81 @@ const Diet = () => {
       <>
         <div className='d-flex justify-content-between mt-3'>
           <div className='d-flex'>
-            <Dropdown className=''>
-              <Dropdown.Toggle variant='success' id='dropdown-basic'>
-                Tuần 1
-              </Dropdown.Toggle>
-              title : {title}
-              <Dropdown.Menu>
-                <Dropdown.Item href='#/action-1' onClick={onChangeDropDown}>
-                  Action
-                </Dropdown.Item>
-                <Dropdown.Item href='#/action-2'>Another action</Dropdown.Item>
-                <Dropdown.Item href='#/action-3'>Something else</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <p className='pt-2 pl-2'></p>
+            <Form.Control
+              as='select'
+              className='mr-sm-2'
+              custom
+              onChange={onChangeDropDown}
+            >
+              {posts.map((post) => (
+                <option
+                  value={post._id}
+                  key={post._id}
+                  onClick={onChangeDropDown}
+                >
+                  Tuần {post.week}
+                </option>
+              ))}
+            </Form.Control>
+            <p className='pt-2 pl-2' style={{ width: '319px' }}>
+              Tiêu đề
+            </p>
           </div>
           <div className='d-flex'>
-            <p className='pt-2'>Trò chuyện</p>
-            <p className='pt-2 pl-2'>Đánh giá</p>
+            <div className='d-flex tool'>
+              <p className='pt-2 mr-1'>Trò chuyện</p>
+              <BsChatSquare className='icon' />
+            </div>
+            <div className='d-flex mr-3 tool'>
+              <p className='pt-2 pl-2'>Đánh giá</p>
+              <BsAward
+                className='icon'
+                style={{ width: '23px', height: '23px' }}
+              />
+            </div>
           </div>
         </div>
 
-        {/* <Row className='row-cols-1 row-cols-md-3 g-4 mx-auto mt-3'>
-          {posts.map((post) => (
-            <Col key={post._id} className='my-2 border'>
-              <p>title: {post.title}</p>
-              <p>week: {post.week}</p>
-              <p>content:</p>
-            </Col>
-          ))}
-        </Row> */}
-        <Table striped bordered hover size='sm'>
-          <tbody>
+        <table className='table-fill'>
+          <thead>
             <tr>
-              <td>Thứ 2</td>
-              <td>{content.monday}</td>
+              <th className='text-left' style={{ width: '240px' }}>
+                Thứ
+              </th>
+              <th className='text-left'>Nội dung</th>
+            </tr>
+          </thead>
+          <tbody className='table-hover'>
+            <tr>
+              <td className='text-left'>Thứ 2</td>
+              <td className='text-left'>{content.monday}</td>
             </tr>
             <tr>
-              <td>Thứ 3</td>
-              <td>{content.thursday}</td>
+              <td className='text-left'>Thứ 3</td>
+              <td className='text-left'>{content.tuesday}</td>
             </tr>
             <tr>
-              <td>Thứ 4</td>
-              <td>{content.wednesday}</td>
+              <td className='text-left'>Thứ 4</td>
+              <td className='text-left'>{content.wednesday}</td>
             </tr>
             <tr>
-              <td>Thứ 5</td>
-              <td>{content.thursday}</td>
+              <td className='text-left'>Thứ 5</td>
+              <td className='text-left'>{content.thursday}</td>
             </tr>
             <tr>
-              <td>Thứ 6</td>
-              <td>{content.friday}</td>
+              <td className='text-left'>Thứ 6</td>
+              <td className='text-left'>{content.friday}</td>
             </tr>
             <tr>
-              <td>Thứ 7</td>
-              <td>{content.saturday}</td>
+              <td className='text-left'>Thứ 7</td>
+              <td className='text-left'>{content.saturday}</td>
             </tr>
             <tr>
-              <td>Chủ nhật</td>
-              <td>{content.sunday}</td>
+              <td className='text-left'>Chủ nhật</td>
+              <td className='text-left'>{content.sunday}</td>
             </tr>
           </tbody>
-        </Table>
+        </table>
       </>
     );
   }

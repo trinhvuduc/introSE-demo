@@ -2,6 +2,7 @@ import { Button, Form, Container, Col, Row } from 'react-bootstrap';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/authContext';
 import AlertMessage from './AlertMessage';
+import './LoginForm.css'
 
 const LoginForm = () => {
   // Context
@@ -39,7 +40,9 @@ const LoginForm = () => {
       <Row>
         <Col />
         <Col md={6} xs={12} className='text-center mt-3'>
-          <h2 className='my-2'>Đăng nhập</h2>
+          <h2 className='my-2'>Đăng nhập vào HealthApp</h2>
+            <div className='box'>  
+            <h7 className='text-1'>Số điện thoại</h7>  
           <AlertMessage info={alert} />
           <Form onSubmit={onLogin}>
             <Form.Group>
@@ -52,6 +55,8 @@ const LoginForm = () => {
                 onChange={onChangeLoginForm}
               />
             </Form.Group>
+             <h7 className='text-2'>Mật Khẩu</h7>
+             <h7 className='text-3a'>Quên mật khẩu?</h7>
             <Form.Group>
               <Form.Control
                 type='password'
@@ -63,13 +68,17 @@ const LoginForm = () => {
               />
             </Form.Group>
             <Button variant='success' type='submit'>
-              Login
+              Đăng nhập
             </Button>
           </Form>
+            </div> 
+            
         </Col>
         <Col />
+        <div className='newAccount'>Bạn mới sử dụng HealthApp? <span>Tạo một tài khoản.</span></div>
       </Row>
     </Container>
+    
   );
 };
 

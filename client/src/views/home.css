@@ -6,12 +6,15 @@ body {
 
 .home {
   display: flex;
-  margin: 0;
+  margin: auto;
   padding: 0;
+  width: 1500px;
+  height: 2000px;
   background: url('../assets/BACKGROUND.png');
   background-repeat: no-repeat;
   height: auto;
   font-family: sans-serif;
+  
 }
 
 .home .max-width .home-content {
@@ -23,11 +26,13 @@ body {
 
 .home .max-width .home-content .text-1 {
   font-size: 15px;
-  margin: 30px 20px 0 0;
+  margin: 20px 20px 0 0;
 }
 
 .home .max-width .home-content .text-2 {
   font-size: 30px;
+  padding: 40px 0 0 0;
+  float: left;
 }
 
 .home .max-width .home-content .text-3 {
@@ -88,6 +93,9 @@ body {
 }
 
 footer {
+    width: 1500px;
+    height: 200px;
+    margin: auto;
 }
 
 footer .container .title {

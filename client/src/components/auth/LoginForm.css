@@ -1,0 +1,78 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #fff;
+}
+
+.box{
+    width: 400px;
+    height: 270px;
+    padding: 40px;
+    margin-top: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f6f8fa;
+    text-align: center;
+}
+
+.text-1{
+    float: left;
+    margin-bottom: 5px;
+}
+
+.text-2{
+    float: left;
+    margin-bottom: 5px;
+}
+
+.text-3a{
+    float: right;
+    cursor: pointer;
+    color: #3498db;
+    text-decoration: underline #3498db;
+}
+
+.box input[type = 'text'],
+.box input[type = 'password']
+{
+    border: 0;
+    width: 300px;
+    background: none;
+    background-color: #fff;
+    display: block;   /*xac dinh thanh phan hien thi theo hang doc lap */
+    margin: 20px auto;
+    text-align: left;
+    border: 2px solid #f2f4f7;
+    padding: 14px 10px;
+    width: 330px;
+    outline: none;
+    color: black;
+    border-radius: 9px;
+    transition: 0.25s;
+}
+
+.newAccount{
+    margin-top:430px;
+    margin-left: 570px;
+    width: 400px;
+    height: 40px;
+    padding-top: 10px;
+    text-align: center;
+    position: absolute;
+    border: 1px solid  #8e8e8e;
+    border-radius: 9px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    text-align: center;
+}
+
+.newAccount span{
+    cursor: pointer;
+    color: #3498db;
+    text-decoration: underline #3498db;
+}
+
+

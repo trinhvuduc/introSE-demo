@@ -66,15 +66,13 @@ const Diet = () => {
               custom
               onChange={onChangeDropDown}
             >
-              {posts.map((post) => (
-                <option
-                  value={post._id}
-                  key={post._id}
-                  onClick={onChangeDropDown}
-                >
-                  Tuần {post.week}
-                </option>
-              ))}
+              <option
+                value={post._id}
+                key={post._id}
+                onClick={onChangeDropDown}
+              >
+                Tuần {week}
+              </option>
             </Form.Control>
             <p className='pt-2 pl-2' style={{ width: '319px' }}>
               Tiêu đề

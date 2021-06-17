@@ -2,7 +2,9 @@ import { Button, Form, Container, Col, Row } from 'react-bootstrap';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../contexts/authContext';
 import AlertMessage from './AlertMessage';
-import './LoginForm.css'
+import { FaMeteor } from 'react-icons/fa';
+
+import './LoginForm.css';
 
 const LoginForm = () => {
   // Context
@@ -40,45 +42,56 @@ const LoginForm = () => {
       <Row>
         <Col />
         <Col md={6} xs={12} className='text-center mt-3'>
-          <h3 className='my-2'>Đăng nhập vào HealthApp</h3>
-            <div className='box'>  
-            <h7 className='text-1'>Số điện thoại</h7>  
-          <AlertMessage info={alert} />
-          <Form onSubmit={onLogin}>
-            <Form.Group>
-              <Form.Control
-                type='text'
-                placeholder='Username'
-                name='username'
-                required
-                value={username}
-                onChange={onChangeLoginForm}
-              />
-            </Form.Group>
-             <h7 className='text-2'>Mật Khẩu</h7>
-             <h7 className='text-3a'>Quên mật khẩu?</h7>
-            <Form.Group>
-              <Form.Control
-                type='password'
-                placeholder='Password'
-                name='password'
-                required
-                value={password}
-                onChange={onChangeLoginForm}
-              />
-            </Form.Group>
-            <Button variant='success' type='submit'>
-              Đăng nhập
-            </Button>
-          </Form>
-            </div> 
-            
+          <div className='mt-3' style={{ color: '#565555' }}>
+            <FaMeteor className='meteor' />
+            <h5 className='mt-2'>HealthApp</h5>
+          </div>
+          <div
+            style={{
+              width: '400px',
+              marginLeft: '70px',
+              marginBottom: '-30px',
+              marginTop: '37px'
+            }}
+          >
+            <AlertMessage info={alert} />
+          </div>
+          <div className='box'>
+            <h6 className='text-1'>Tên đăng nhập</h6>
+
+            <Form onSubmit={onLogin}>
+              <Form.Group>
+                <Form.Control
+                  type='text'
+                  name='username'
+                  required
+                  value={username}
+                  onChange={onChangeLoginForm}
+                />
+              </Form.Group>
+              <h6 className='text-2'>Mật Khẩu</h6>
+              <h6 className='text-3a'>Quên mật khẩu?</h6>
+              <Form.Group>
+                <Form.Control
+                  type='password'
+                  name='password'
+                  required
+                  value={password}
+                  onChange={onChangeLoginForm}
+                />
+              </Form.Group>
+              <Button variant='success' type='submit' className='login'>
+                Đăng nhập
+              </Button>
+            </Form>
+          </div>
+          <div className='newAccount'>
+            Bạn mới sử dụng HealthApp? <span>Tạo tài khoản mới.</span>
+          </div>
         </Col>
         <Col />
-        <div className='newAccount'>Bạn mới sử dụng HealthApp? <span>Tạo một tài khoản.</span></div>
       </Row>
     </Container>
-    
   );
 };
 

@@ -114,14 +114,14 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res
         .status(400)
-        .json({ success: false, message: 'Incorrect username or password' });
+        .json({ success: false, message: 'Sai tên đăng nhập hoặc tài khoản' });
     }
     // Username found
     const passwordValid = await argon2.verify(user.password, password);
     if (!passwordValid) {
       return res
         .status(400)
-        .json({ success: false, message: 'Incorrect password or password' });
+        .json({ success: false, message: 'Sai tên đăng nhập hoặc tài khoản' });
     }
     // All good
     // Return token

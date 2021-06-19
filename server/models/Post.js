@@ -6,7 +6,7 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  week: String,
+  week: Number,
   content: {
     monday: String,
     tuesday: String,
@@ -26,7 +26,11 @@ const PostSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'clients'
     }
-  ]
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 module.exports = mongoose.model('posts', PostSchema);

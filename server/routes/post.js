@@ -15,13 +15,15 @@ router.get('/', verifyToken, async (req, res) => {
     if (role === 'expert') {
       const posts = await Post.find({ expertId })
         .select('-clientsId')
-        .populate('expertId', 'name');
+        .populate('expertId', 'name')
+        .sort({ createdAt: -1 });
 
       return res.json({ success: true, posts });
     } else if (role === 'client') {
       const posts = await Post.find({ clientsId: clientId })
         .select('-clientsId')
-        .populate('expertId', 'name');
+        .populate('expertId', 'name')
+        .sort({ createdAt: -1 });
 
       if (posts.length === 0) {
         return res
@@ -41,7 +43,8 @@ router.get('/', verifyToken, async (req, res) => {
 // @desc Create post
 // @access Private
 router.post('/', verifyToken, verifyExpert, async (req, res) => {
-  const { title, content, week, note, clientsId } = req.body;
+  const { title, content, note, clientsId } = req.body;
+  let { week } = req.body;
   const { monday, tuesday, wednesday, thursday, friday, saturday, sunday } =
     content;
 
@@ -51,6 +54,7 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
       .status(400)
       .json({ success: false, message: 'Chưa nhập tiêu đề' });
   }
+
   function isNumeric(value) {
     return /^-?\d+$/.test(value);
   }
@@ -59,11 +63,27 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
       .status(400)
       .json({ success: false, message: 'Sai định dạng tuần' });
   }
+
+  week = parseInt(week);
+
+  const maxPost = await Post.find({}).sort({ week: -1 }).limit(1);
+  let maxWeek = 0;
+  if (maxPost.length > 0) {
+    maxWeek = maxPost[0].week;
+  }
+  if (week <= maxWeek) {
+    return res.status(400).json({
+      success: false,
+      message: `Vui lòng chọn tuần lớn hơn. Tuần cũ: ${maxWeek}`
+    });
+  }
+
   if (!content) {
     return res
       .status(400)
       .json({ success: false, message: 'Content is required' });
   }
+
   const str =
     monday + tuesday + wednesday + thursday + friday + saturday + sunday;
   if (!str) {
@@ -77,6 +97,8 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
       .status(400)
       .json({ success: false, message: 'Chưa chọn khách hàng nào' });
   }
+
+  // All good
   try {
     const newPost = new Post({
       title,

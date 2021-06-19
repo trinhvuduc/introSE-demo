@@ -63,22 +63,21 @@ const PostForm = () => {
     try {
       const res = await addPost(newPost);
       if (res.success) {
-        setPost({
-          ...newPost,
-          title: '',
-          content: {
-            monday: '',
-            tuesday: '',
-            wednesday: '',
-            thursday: '',
-            friday: '',
-            saturday: '',
-            sunday: ''
-          },
-          week: '',
-          note: ''
-        });
-
+        // setPost({
+        //   ...newPost,
+        //   title: '',
+        //   content: {
+        //     monday: '',
+        //     tuesday: '',
+        //     wednesday: '',
+        //     thursday: '',
+        //     friday: '',
+        //     saturday: '',
+        //     sunday: ''
+        //   },
+        //   week: '',
+        //   note: ''
+        // });
         setAlert({ type: 'success', message: res.message });
         setTimeout(() => setAlert(null), 5000);
       } else {

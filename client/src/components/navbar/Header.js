@@ -49,13 +49,16 @@ const Header = (props) => {
                 </Nav>
                 <div>
                   <span>Xin chào, {name}</span>
-                  <Button
-                    variant='secondary'
-                    className='ml-2'
-                    onClick={logoutUser}
-                  >
-                    Log out
-                  </Button>
+
+                  <a href='/login'>
+                    <Button
+                      variant='secondary'
+                      className='ml-2'
+                      onClick={logoutUser}
+                    >
+                      Log out
+                    </Button>
+                  </a>
                 </div>
               </Navbar.Collapse>
             </Navbar>

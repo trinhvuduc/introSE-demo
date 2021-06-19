@@ -127,7 +127,7 @@ const Diet = () => {
         <Row className='row-cols-1 row-cols-md-3 g-4 mx-auto mt-3'>
           {posts.map((post, i) => (
             <Col key={post._id} className='my-2 border'>
-              <p>Bài {posts.length - i}</p>
+              <p>Bài {i + 1}</p>
               <p>Tiêu đề: {post.title}</p>
               <p>Tuần: {post.week}</p>
               <span className='mr-2 bar'>

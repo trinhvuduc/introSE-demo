@@ -16,7 +16,7 @@ router.get('/', verifyToken, async (req, res) => {
       const posts = await Post.find({ expertId })
         .select('-clientsId')
         .populate('expertId', 'name')
-        .sort({ createdAt: -1 });
+        .sort({ createdAt: 1 });
 
       return res.json({ success: true, posts });
     } else if (role === 'client') {
@@ -64,9 +64,12 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
       .json({ success: false, message: 'Sai định dạng tuần' });
   }
 
-  week = parseInt(week);
+  // mới chỉ check được tuần của một Expert, chưa check được cho từng user
+  week = parseInt(week); // convert to number
 
-  const maxPost = await Post.find({}).sort({ week: -1 }).limit(1);
+  const maxPost = await Post.find({ expertId: req.expertId })
+    .sort({ week: -1 })
+    .limit(1);
   let maxWeek = 0;
   if (maxPost.length > 0) {
     maxWeek = maxPost[0].week;

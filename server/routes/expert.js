@@ -76,8 +76,17 @@ router.post('/register', async (req, res) => {
 router.put('/add', verifyToken, verifyExpert, async (req, res) => {
   const expertId = req.expertId;
   const { clientsId } = req.body;
-  console.log(expertId);
+
   try {
+    const expert = await Expert.find({ clientsId: { $in: clientsId } });
+    if (expert.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'At least one client already taken. Check again'
+      });
+    }
+
+    // All good
     const condition = { _id: expertId };
     const updatedExpert = await Expert.findOneAndUpdate(
       condition,
@@ -86,7 +95,6 @@ router.put('/add', verifyToken, verifyExpert, async (req, res) => {
       },
       { new: true }
     );
-
     if (!updatedExpert) {
       return res.status(401).json({
         success: false,

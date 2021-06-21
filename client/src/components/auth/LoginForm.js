@@ -67,6 +67,7 @@ const LoginForm = () => {
                   required
                   value={username}
                   onChange={onChangeLoginForm}
+                  autoFocus
                 />
               </Form.Group>
               <h6 className='text-2'>Mật khẩu</h6>

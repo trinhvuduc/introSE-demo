@@ -23,9 +23,6 @@ const Diet = () => {
 
   useEffect(() => getPosts(), []);
 
-  let post = { ...posts[posts.length - 1] };
-  const { content, title, week } = post;
-
   let body = null;
 
   const onChangeSelect = (e) => {

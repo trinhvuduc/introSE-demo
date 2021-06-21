@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { useContext, useState, useEffect } from 'react';
+import { Form, Row, Col, Button, Modal } from 'react-bootstrap';
 
 import { AuthContext } from '../../contexts/authContext';
 import { PostContext } from '../../contexts/postContext';
@@ -37,6 +37,39 @@ const PostForm = () => {
   // Alert state
   const [alert, setAlert] = useState(null);
 
+  // Modal state
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  // Component did mount
+  useEffect(() => {
+    window.addEventListener('paste', (e) => {
+      e.preventDefault();
+      let data = e.clipboardData.getData('text');
+      data = data.split('\n');
+      setPost({
+        ...newPost,
+        title: data[0],
+        week: data[1],
+        content: {
+          monday: data[2],
+          tuesday: data[3],
+          wednesday: data[4],
+          thursday: data[5],
+          friday: data[6],
+          saturday: data[7],
+          sunday: data[8]
+        }
+      });
+    });
+
+    // return () => {
+    //   window.removeEventListener('paste');
+    // };
+  }, [newPost]);
+
   const onChangeForm = (event) => {
     setPost({ ...newPost, [event.target.name]: event.target.value });
   };
@@ -63,24 +96,26 @@ const PostForm = () => {
     try {
       const res = await addPost(newPost);
       if (res.success) {
-        // setPost({
-        //   ...newPost,
-        //   title: '',
-        //   content: {
-        //     monday: '',
-        //     tuesday: '',
-        //     wednesday: '',
-        //     thursday: '',
-        //     friday: '',
-        //     saturday: '',
-        //     sunday: ''
-        //   },
-        //   week: '',
-        //   note: ''
-        // });
+        setPost({
+          ...newPost,
+          title: '',
+          content: {
+            monday: '',
+            tuesday: '',
+            wednesday: '',
+            thursday: '',
+            friday: '',
+            saturday: '',
+            sunday: ''
+          },
+          week: '',
+          note: ''
+        });
+        setShow(false);
         setAlert({ type: 'success', message: res.message });
         setTimeout(() => setAlert(null), 5000);
       } else {
+        setShow(false);
         setAlert({ type: 'danger', message: res.message });
         setTimeout(() => setAlert(null), 5000);
       }
@@ -236,11 +271,27 @@ const PostForm = () => {
             style={{ width: 'inherit' }}
             variant='success'
             type='submit'
-            onClick={onSubmit}
+            onClick={handleShow}
             className='input-form'
           >
             Submit
           </Button>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            style={{ marginTop: '150px' }}
+          >
+            <Modal.Header closeButton />
+            <Modal.Body>Bạn xác nhận muốn lưu chứ?</Modal.Body>
+            <Modal.Footer>
+              <Button variant='secondary' onClick={handleClose}>
+                Hủy
+              </Button>
+              <Button variant='primary' onClick={onSubmit}>
+                Lưu
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Col>
       </Row>
     </>

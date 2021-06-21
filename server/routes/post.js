@@ -65,21 +65,21 @@ router.post('/', verifyToken, verifyExpert, async (req, res) => {
   }
 
   // mới chỉ check được tuần của một Expert, chưa check được cho từng user
-  week = parseInt(week); // convert to number
+  // week = parseInt(week); // convert to number
 
-  const maxPost = await Post.find({ expertId: req.expertId })
-    .sort({ week: -1 })
-    .limit(1);
-  let maxWeek = 0;
-  if (maxPost.length > 0) {
-    maxWeek = maxPost[0].week;
-  }
-  if (week <= maxWeek) {
-    return res.status(400).json({
-      success: false,
-      message: `Vui lòng chọn tuần lớn hơn. Tuần cũ: ${maxWeek}`
-    });
-  }
+  // const maxPost = await Post.find({ expertId: req.expertId })
+  //   .sort({ week: -1 })
+  //   .limit(1);
+  // let maxWeek = 0;
+  // if (maxPost.length > 0) {
+  //   maxWeek = maxPost[0].week;
+  // }
+  // if (week <= maxWeek) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: `Vui lòng chọn tuần lớn hơn. Tuần cũ: ${maxWeek}`
+  //   });
+  // }
 
   if (!content) {
     return res
